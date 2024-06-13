@@ -14,7 +14,6 @@ const createContract = async()=>{
 }
 
 export const ContextProvider = ({children})=>{
-    
     const [currentAccount, setCurrentAccount] = useState('');
     const connectToWallet = async()=>{
         try{    
@@ -120,13 +119,21 @@ export const ContextProvider = ({children})=>{
             console.log(err);
         }
     }
-    return (<myContext.Provider value={{}}>
+    return (<myContext.Provider 
+    value={{
+                connectToWallet, 
+                requestToConnectWallet, 
+                sendFriendRequest, 
+                getAllFriendRequests, 
+                addPost, 
+                getAllPosts
+            }}>
         {
             children
         }
     </myContext.Provider>)
 }
 
-export const GetGlobalProps = async()=>{
+export const GetGlobalProps = ()=>{
     return useContext(myContext);
 }
