@@ -55,7 +55,7 @@ export const ContextProvider = ({children})=>{
         try{
             connectToWallet();
             if(currentAccount === ''){
-                // alert te user to first connect his/her wallet inorder to send friend rrequests
+                // alert te user to first connect his/her wallet inorder to send friend requests
                 return; 
             }
             const contract = await createContract();
@@ -116,6 +116,35 @@ export const ContextProvider = ({children})=>{
         } catch(err){
             console.log(err);
         }
+    }
+    const updateProfile = async(_name, _lives, _organisation, _about) => {
+        const contract = await createContract();
+        connectToWallet();
+        if(currentAccount === ''){
+            // alert te user to first connect his/her wallet inorder to update/edit his profile
+            return; 
+        }
+        await contract.updateProfile(_name, _lives, _organisation, _about);
+    }
+
+    const updateDesc = async(_desc) => {
+        const contract = await createContract();
+        connectToWallet();
+        if(currentAccount === ''){
+            // alert te user to first connect his/her wallet inorder to update/edit his profile
+            return; 
+        }
+        await contract.updateDesc(_desc);
+    }
+
+    const updateSkills = async(_newSkill) => {
+        const contract = await createContract();
+        connectToWallet();
+        if(currentAccount === ''){
+            // alert te user to first connect his/her wallet inorder to update/edit his profile
+            return; 
+        }
+        await contract.updateSkills(_newSkill);
     }
     const getUserProfile = async(user)=>{
         try{

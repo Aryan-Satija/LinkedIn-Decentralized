@@ -35,10 +35,10 @@ const BuildProfile3 = ({profile, setProfile, setStep}) => {
             <label htmlFor='skills' className='text-slate-600'>Skills*</label>
             <input type='text' id='skills' onChange={changeHandler} className='w-full p-4 border-slate-400 border-2 rounded-sm'/>
         </div>
-        <div>
+        <div className='flex flex-col items-start mt-2 gap-2'>
           {
             profile.skills.map((skill)=>{
-              return (<div className='text-[#0b67c2] rounded-md bg-[#0b67c2]/20 p-2 mt-8 inline-block cursor-pointer text-md font-bold hover:scale-95 duration-200'>
+              return (<div className='text-[#0b67c2] rounded-md bg-[#0b67c2]/20 p-2  inline-block cursor-pointer text-md font-bold hover:scale-95 duration-200'>
                 {
                   skill
                 }
