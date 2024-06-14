@@ -157,7 +157,7 @@ contract chatapp {
         userProfile[msg.sender].name = _name;
         userProfile[msg.sender].lives = _lives;
         userProfile[msg.sender].organisation = _organisation;
-        userProfile[msg.sender].lives = _lives;
+        userProfile[msg.sender].about = _about;
     }
     function updateSkills(string memory _newSkill) nonEmpty(_newSkill) external {
         userProfile[msg.sender].skills.push(_newSkill);

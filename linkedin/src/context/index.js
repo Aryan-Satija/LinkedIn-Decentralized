@@ -180,7 +180,10 @@ export const ContextProvider = ({children})=>{
                 getAllFriendRequests, 
                 addPost, 
                 getAllPosts,
-                getUserProfile
+                getUserProfile,
+                updateProfile,
+                updateDesc,
+                updateSkills
             }}>
         {
             children

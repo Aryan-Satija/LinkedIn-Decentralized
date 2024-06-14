@@ -1,20 +1,22 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
+import { GetGlobalProps } from '../context';
+
 const BuildProfile3 = ({profile, setProfile, setStep}) => {
   const [skills, setSkills] = useState(profile.skills);
   const [newSkill, setNewSkill] = useState('');
-
+  const {updateSkills} = GetGlobalProps();
   const changeHandler = (event)=>{
     setNewSkill(event.target.value);
   }
-  const addHandler = ()=>{
+  const addHandler = async()=>{
     setSkills((prev)=>{
       return [...prev, newSkill];
     })
     
-    setNewSkill('');
-
-
+    await updateSkills(newSkill)
+    
+    setNewSkill(''); 
   }
   useEffect(()=>{
     setProfile(prev => {
@@ -23,8 +25,8 @@ const BuildProfile3 = ({profile, setProfile, setStep}) => {
         'skills': skills
       } 
     })
+
   }, [skills])
-  console.log(profile);
   const submitHandler = (event)=>{
     event.preventDefault();
     setStep(3);

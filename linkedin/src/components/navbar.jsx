@@ -5,12 +5,14 @@ import { FaSuitcase } from "react-icons/fa6";
 import { MdOutlineMessage } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { GetGlobalProps } from '../context';
+import {useNavigate} from 'react-router-dom';
 const Navbar = () => {
+    const navigate = useNavigate();
     const {connectToWallet, requestToConnectWallet, currentAccount, getUserProfile} = GetGlobalProps();
     const [profile, setProfile] = useState(null);
     useEffect(()=>{
         (async()=>{
-            await requestToConnectWallet()
+            await requestToConnectWallet();
         })()
     }, [])
     useEffect(()=>{
@@ -24,8 +26,7 @@ const Navbar = () => {
     useEffect(()=>{
         (async()=>{
             if(profile && profile.name === ''){
-                // navigate to create profile page
-                console.log('navigate to create profile page')
+                navigate('/build');
             }
         })()
     }, [profile])

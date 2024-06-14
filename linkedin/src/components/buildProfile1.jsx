@@ -1,6 +1,8 @@
 import React from 'react'
+import { GetGlobalProps } from '../context';
 
 const BuildProfile1 = ({profile, setProfile, setStep}) => {
+    const {updateProfile} = GetGlobalProps();
     const changeHandler = (event)=>{
         setProfile((prev)=>{
             return {
@@ -11,6 +13,9 @@ const BuildProfile1 = ({profile, setProfile, setStep}) => {
     }
     const submitHandler = (event)=>{
         event.preventDefault();
+        (async()=>{
+            await updateProfile(profile.name, profile.lives, profile.organisation, profile.about)
+        })()
         setStep(2);
     }
     return (
