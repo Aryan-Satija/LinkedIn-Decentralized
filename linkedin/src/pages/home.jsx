@@ -13,10 +13,10 @@ const Home = () => {
     },[])
     console.log(posts);
   return (
-    <div className='bg-[#f4f2ee] flex flex-col gap-4 justify-center items-center p-4 min-h-screen'>
+    <div className='bg-[#f4f2ee] pt-[5rem] flex flex-col gap-4 justify-center items-center p-4 min-h-screen'>
         {
             posts.map((post) => {
-                return <div className='bg-[#fefefe] w-[40%] min-w-[320px] p-4 rounded-md shadow-md'>
+                return <div className='bg-[#fefefe] w-[80%] md:w-[40%] min-w-[320px] p-4 rounded-md shadow-md'>
                     <div className='text-sm text-slate-400 cursor-pointer'>
                         Author Post Id : { post.id }
                     </div>
