@@ -8,7 +8,6 @@ const myContext = createContext();
 const createContract = async()=>{
     const provider = new ethers.BrowserProvider(ethereum);
     const signer = await provider.getSigner();
-    console.log(signer);
     const contract = new ethers.Contract(contractAddress, contractAbi, signer);
     return contract;
 }
@@ -84,7 +83,6 @@ export const ContextProvider = ({children})=>{
                     time: new Date(Number(request.time) * 1000).toLocaleString()
                 })
             })
-            console.log(requests);
         } catch(err){
             console.log(err);
         }
@@ -122,7 +120,12 @@ export const ContextProvider = ({children})=>{
     const getUserProfile = async(user)=>{
         try{
             const contract = await createContract();
-            const profile = await contract.userProfile(user);
+            const profile = await contract.getUserProfile(user);
+            const skills = [];
+            profile.skills.forEach((skill)=>{
+                skills.push(skill)
+            })
+            console.log(skills);
             const userProfile = {
                 name: profile.name,
                 pronoun: profile.pronoun,
@@ -130,8 +133,10 @@ export const ContextProvider = ({children})=>{
                 organisation: profile.organisation,
                 lives: profile.lives,
                 about: profile.about,
-                image: profile.image
+                image: profile.image,
+                skills: skills
             }
+
             return userProfile;
         } catch(err){
             console.log(err);

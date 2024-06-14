@@ -1,8 +1,7 @@
 import React from 'react'
 
-const BuildProfile1 = ({profile, setProfile}) => {
+const BuildProfile1 = ({profile, setProfile, setStep}) => {
     const changeHandler = (event)=>{
-        
         setProfile((prev)=>{
             return {
                 ...prev,
@@ -10,10 +9,13 @@ const BuildProfile1 = ({profile, setProfile}) => {
             }
         })
     }
-    console.log(profile)
+    const submitHandler = (event)=>{
+        event.preventDefault();
+        setStep(2);
+    }
     return (
     <div className='w-[60%] lg:w-[40%] min-w-[320px] p-2 mx-auto mt-[4rem]'>
-        <form>
+        <form onSubmit={submitHandler}>
             <div>
                 <label htmlFor='name' className='text-slate-600'>Name*</label>
                 <input type='text' id='name' placeholder={profile.name} onChange={changeHandler} className='w-full p-4 border-slate-400 border-2 rounded-sm'/>
@@ -50,7 +52,9 @@ const BuildProfile1 = ({profile, setProfile}) => {
                     }}>She/Her</div>
                 </div>
             </div>
-            <button className='text-[#0b67c2] rounded-md bg-[#0b67c2]/20 p-2 mt-8 cursor-pointer text-md font-bold hover:scale-95 duration-200'>Next</button>
+            <div className='flex flex-col'>
+                <button className='text-[#0b67c2] rounded-md bg-[#0b67c2]/20 p-2 mt-8 cursor-pointer text-md font-bold hover:scale-95 duration-200'>Next</button>
+            </div>
         </form>
     </div>
   )

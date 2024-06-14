@@ -153,11 +153,17 @@ contract chatapp {
     function updateDesc(string memory _description) nonEmpty(_description) external {
         userProfile[msg.sender].description = _description;
     }
-    function updateAbout(string memory _about) nonEmpty(_about) external {
-        userProfile[msg.sender].about = _about;
+    function updateProfile(string memory _name, string memory _lives, string memory _organisation, string memory _about) nonEmpty(_about) external {
+        userProfile[msg.sender].name = _name;
+        userProfile[msg.sender].lives = _lives;
+        userProfile[msg.sender].organisation = _organisation;
+        userProfile[msg.sender].lives = _lives;
     }
     function updateSkills(string memory _newSkill) nonEmpty(_newSkill) external {
         userProfile[msg.sender].skills.push(_newSkill);
+    }
+    function getUserProfile(address user) external view returns(Profile memory) {
+        return userProfile[user];
     }
 }
 

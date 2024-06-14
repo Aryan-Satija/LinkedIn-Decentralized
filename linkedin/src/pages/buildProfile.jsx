@@ -29,7 +29,15 @@ const BuildProfile = () => {
                     <div className={step == 2 ? 'text-sky-600 bg-sky-400/40 p-4 w-16 aspect-square flex items-center justify-center rounded-full' : 'p-4 w-16 aspect-square flex items-center justify-center'}>2</div>
                     <div className={step == 3 ? 'text-sky-600 bg-sky-400/40 p-4 w-16 aspect-square flex items-center justify-center rounded-full' : 'p-4 w-16 aspect-square flex items-center justify-center'}>3</div>
                 </div>
-                <BuildProfile1 profile={profile} setProfile={setProfile}/>
+                {
+                    step === 1 && <BuildProfile1 profile={profile} setProfile={setProfile} setStep={setStep}/>
+                }
+                {
+                    step === 2 && <BuildProfile2 profile={profile} setProfile={setProfile} setStep={setStep}/>
+                }
+                {
+                    step === 3 && <BuildProfile3 profile={profile} setProfile={setProfile} setStep={setStep}/>
+                }
             </div>)
     )
 }
