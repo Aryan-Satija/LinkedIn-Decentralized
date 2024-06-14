@@ -119,14 +119,34 @@ export const ContextProvider = ({children})=>{
             console.log(err);
         }
     }
+    const getUserProfile = async(user)=>{
+        try{
+            const contract = await createContract();
+            const profile = await contract.userProfile(user);
+            const userProfile = {
+                name: profile.name,
+                pronoun: profile.pronoun,
+                description: profile.description,
+                organisation: profile.organisation,
+                lives: profile.lives,
+                about: profile.about,
+                image: profile.image
+            }
+            return userProfile;
+        } catch(err){
+            console.log(err);
+        }
+    }
     return (<myContext.Provider 
     value={{
+                currentAccount,
                 connectToWallet, 
                 requestToConnectWallet, 
                 sendFriendRequest, 
                 getAllFriendRequests, 
                 addPost, 
-                getAllPosts
+                getAllPosts,
+                getUserProfile
             }}>
         {
             children

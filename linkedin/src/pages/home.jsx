@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { GetGlobalProps } from '../context'
 const Home = () => {
     const {getAllPosts} = GetGlobalProps();
-    console.log(getAllPosts)
     const [posts, setPosts] = useState([]);
     useEffect(()=>{
         (async()=>{
@@ -11,7 +10,6 @@ const Home = () => {
             setPosts(result);
         })()
     },[])
-    console.log(posts);
   return (
     <div className='bg-[#f4f2ee] pt-[5rem] flex flex-col gap-4 justify-center items-center p-4 min-h-screen'>
         {
