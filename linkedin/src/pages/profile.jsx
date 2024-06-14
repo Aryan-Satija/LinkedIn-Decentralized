@@ -1,8 +1,8 @@
 import React from 'react'
 
-const profile = () => {
+const Profile = () => {
     return (
-        <div className='bg-[#f4f2ee] flex flex-col gap-4 justify-center items-center p-4 min-h-screen'>
+        <div className='bg-[#f4f2ee] pt-[5rem] flex flex-col gap-4 justify-center items-center p-4 min-h-screen'>
             <div className='w-[80%] min-w-[320px] bg-[#fefffe] p-4 rounded-md relative'>
                 <div className='bg-slate-800 w-full h-[150px] rounded-t-md'>
                 </div>
@@ -47,4 +47,4 @@ const profile = () => {
       )
 }
 
-export default profile
+export default Profile

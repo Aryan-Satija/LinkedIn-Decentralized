@@ -31,7 +31,7 @@ const Navbar = () => {
     }, [profile])
     console.log(profile);
     return (
-    <div className='bg-[#fefeff] w-full flex flex-row items-center justify-center gap-16 p-4 fixed'>
+    <div className='bg-[#fefeff] w-full flex flex-row items-center z-50 justify-center gap-16 p-4 fixed'>
         <div className='flex flex-col items-center cursor-pointer hover:text-[#0E4980] font-bold text-slate-600'>
             <div><CgProfile/></div>
             <div className='hidden md:block'>Profile</div>
