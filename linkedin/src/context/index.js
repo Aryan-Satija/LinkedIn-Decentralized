@@ -154,7 +154,7 @@ export const ContextProvider = ({children})=>{
             profile.skills.forEach((skill)=>{
                 skills.push(skill)
             })
-            console.log(skills);
+            
             const userProfile = {
                 name: profile.name,
                 pronoun: profile.pronoun,

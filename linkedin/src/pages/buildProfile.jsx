@@ -6,7 +6,7 @@ import BuildProfile3 from '../components/buildProfile3';
 const BuildProfile = () => {
     const {connectToWallet, currentAccount, getUserProfile} = GetGlobalProps();
     const [profile, setProfile] = useState(null);
-    const [step, setStep] = useState(3); 
+    const [step, setStep] = useState(1); 
     useEffect(()=>{
         (async()=>{
             await connectToWallet()

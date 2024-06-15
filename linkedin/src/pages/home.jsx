@@ -29,7 +29,7 @@ const Home = () => {
                     })}</div>
                     <div>
                     {
-                        post.image && <img className='rounded-md shadow-md shadow-slate-400' src={`https://ipfs.io/ipfs/${post.image}`}/>
+                        post.image && <img className='rounded-md shadow-md shadow-slate-400' src={`${post.image}`}/>
                     }
                     </div>
                     <div className='flex flex-col mt-4 lg:flex-row items-center w-full justify-between text-base text-slate-500 font-bold'>
