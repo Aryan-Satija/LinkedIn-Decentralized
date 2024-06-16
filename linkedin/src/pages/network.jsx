@@ -1,32 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import { GetGlobalProps } from '../context';
 
 const Network = () => {
     const [requests, setRequests] = useState([]);
-
+    const { getAllFriendRequests } = GetGlobalProps();
     useEffect(()=>{
         // get requests
-        setRequests([
-            {
-                from: "0xc78fF2b7cF14E12513A7475146D69Db7818bb161",
-                to: "0x19B69fAfa794911232E24e2c33dC171471469f01",
-                time: "01/12/2024 08:24"
-            },
-            {
-                from: "0xc78fF2b7cF14E12513A7475146D69Db7818bb161",
-                to: "0x19B69fAfa794911232E24e2c33dC171471469f01",
-                time: "02/12/2024 13:09"
-            },
-            {
-                from: "0xc78fF2b7cF14E12513A7475146D69Db7818bb161",
-                to: "0x19B69fAfa794911232E24e2c33dC171471469f01",
-                time: "02/12/2024 05:45"
-            },
-            {
-                from: "0xc78fF2b7cF14E12513A7475146D69Db7818bb161",
-                to: "0x19B69fAfa794911232E24e2c33dC171471469f01",
-                time: "04/12/2024 07:15"
-            }
-        ])
+        (async()=>{
+            const requests = await getAllFriendRequests();
+            setRequests(requests);
+            console.log(requests);
+        })()
     }, [])
     
     return (<div className='bg-[#f4f2ee] pt-[5rem] flex flex-col gap-4 items-center p-4 min-h-screen'>
@@ -40,6 +24,9 @@ const Network = () => {
                         <div className='text-sm text-slate-600'>{request.time}</div>
                     </div>)
                 })
+            }
+            {
+                requests.length === 0
             }
         </div>
     </div>);

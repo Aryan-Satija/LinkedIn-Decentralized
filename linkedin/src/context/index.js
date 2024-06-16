@@ -74,6 +74,9 @@ export const ContextProvider = ({children})=>{
     const getAllFriendRequests = async()=>{
         const contract = await createContract();
         try{
+            await connectToWallet();
+            console.log(currentAccount)
+            if(currentAccount === '') return [];
             const friends = await contract.getAllRequests(currentAccount);
             const requests = []
             friends.forEach((request, index) => {
