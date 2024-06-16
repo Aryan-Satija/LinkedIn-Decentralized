@@ -1,8 +1,9 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { GetGlobalProps } from '../context';
-
+import { useNavigate } from 'react-router-dom';
 const BuildProfile3 = ({profile, setProfile, setStep}) => {
+  const navigate = useNavigate();
   const [skills, setSkills] = useState(profile.skills);
   const [newSkill, setNewSkill] = useState('');
   const {updateSkills} = GetGlobalProps();
@@ -29,7 +30,7 @@ const BuildProfile3 = ({profile, setProfile, setStep}) => {
   }, [skills])
   const submitHandler = (event)=>{
     event.preventDefault();
-    setStep(3);
+    navigate("/");   
   }
   return (
     <div className='w-[60%] lg:w-[40%] min-w-[320px] p-2 mx-auto mt-[4rem]'>
