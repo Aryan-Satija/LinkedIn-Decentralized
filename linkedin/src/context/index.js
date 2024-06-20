@@ -71,14 +71,12 @@ export const ContextProvider = ({children})=>{
         }
     }
 
-    const getAllFriendRequests = async()=>{
+    const getAllFriendRequests = async(user)=>{
         const contract = await createContract();
         try{
-            await connectToWallet();
-            console.log(currentAccount)
-            if(currentAccount === '') return [];
-            const friends = await contract.getAllRequests(currentAccount);
+            const friends = await contract.getAllRequests(user);
             const requests = []
+            
             friends.forEach((request, index) => {
                 requests.push({
                     from: request.from,
@@ -86,6 +84,8 @@ export const ContextProvider = ({children})=>{
                     time: new Date(Number(request.time) * 1000).toLocaleString()
                 })
             })
+
+            return requests;
         } catch(err){
             console.log(err);
         }

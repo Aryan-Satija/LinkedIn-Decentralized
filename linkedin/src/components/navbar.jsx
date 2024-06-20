@@ -34,28 +34,40 @@ const Navbar = () => {
     <div className='bg-[#fefeff] w-full flex flex-row items-center z-50 justify-center gap-16 p-4 fixed'>
         <div className='flex flex-col items-center cursor-pointer hover:text-[#0E4980] font-bold text-slate-600'>
             <div><CgProfile/></div>
-            <div className='hidden md:block'>Profile</div>
+            <div className='hidden md:block' onClick={()=>{
+                navigate('/profile');
+            }}>Profile</div>
         </div>
         <div className='flex flex-row items-center gap-8 md:gap-16'>
             <div className='flex flex-col items-center cursor-pointer hover:text-[#0E4980] font-bold text-slate-600'>
                 <div><FaHome/></div>
-                <div className='hidden md:block'>Home</div>
+                <div className='hidden md:block' onClick={()=>{
+                    navigate('/');
+                }}>Home</div>
             </div>
             <div className='flex flex-col items-center cursor-pointer hover:text-[#0E4980] font-bold text-slate-600'>
                 <div><IoPeopleOutline/></div>
-                <div className='hidden md:block'>Network</div>
+                <div className='hidden md:block' onClick={()=>{
+                    navigate('/network');
+                }}>Network</div>
             </div>
             <div className='flex flex-col items-center cursor-pointer hover:text-[#0E4980] font-bold text-slate-600'>
                 <div><FaSuitcase/></div>
-                <div className='hidden md:block'>Jobs</div>
+                <div className='hidden md:block' onClick={()=>{
+                    navigate('/jobs');
+                }}>Jobs</div>
             </div>
             <div className='flex flex-col items-center cursor-pointer hover:text-[#0E4980] font-bold text-slate-600'>
                 <div><MdOutlineMessage/></div>
-                <div className='hidden md:block'>Messaging</div>
+                <div className='hidden md:block' onClick={()=>{
+                    navigate('/messages');
+                }}>Messaging</div>
             </div>
             <div className='flex flex-col items-center cursor-pointer hover:text-[#0E4980] font-bold text-slate-600'>
                 <div><FaBell/></div>
-                <div className='hidden md:block'>Notifications</div>
+                <div className='hidden md:block' onClick={()=>{
+                    navigate('/notifications');
+                }}>Notifications</div>
             </div>
         </div>
         <div>

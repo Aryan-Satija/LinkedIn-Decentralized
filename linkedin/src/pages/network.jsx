@@ -3,18 +3,20 @@ import { GetGlobalProps } from '../context';
 
 const Network = () => {
     const [requests, setRequests] = useState([]);
-    const { getAllFriendRequests } = GetGlobalProps();
+    const { getAllFriendRequests, currentAccount } = GetGlobalProps();
     useEffect(()=>{
         // get requests
-        (async()=>{
-            const requests = await getAllFriendRequests();
-            setRequests(requests);
-            console.log(requests);
-        })()
-    }, [])
+        if(currentAccount !== ''){
+            (async()=>{
+                const requests = await getAllFriendRequests(currentAccount);
+                setRequests(requests);
+                console.log(requests);
+            })()
+        }
+    }, [currentAccount])
     
     return (<div className='bg-[#f4f2ee] pt-[5rem] flex flex-col gap-4 items-center p-4 min-h-screen'>
-        <div className='bg-[#ffffff] p-4 rounded-md'>
+        <div className='bg-[#ffffff] min-w-[320px] p-4 rounded-md'>
             <div className='text-4xl text-sky-800 font-semibold mb-4'>Invitations</div>
             {
                 requests.map((request, id)=>{
@@ -26,7 +28,7 @@ const Network = () => {
                 })
             }
             {
-                requests.length === 0
+                requests.length === 0 && <div>Inbox is empty</div>
             }
         </div>
     </div>);
