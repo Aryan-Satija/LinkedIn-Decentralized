@@ -53,31 +53,39 @@ const Profile = () => {
                 </div>
             </div>
             <div className='bg-[#fefefe] w-[80%] min-w-[320px] p-4 rounded-md shadow-md'>
-                    <div className='font-bold mb-2'>My Posts</div>
-                    <div className='text-sm text-slate-400 cursor-pointer'>
-                        Author Post Id : { posts[0]?.id }
-                    </div>
-                    <div className='flex flex-col lg:flex-row items-center w-full justify-between text-lg font-bold'>
-                        <div>Author: {posts[0]?.author.substr(0, 20)}...</div>
-                        <button className='text-[#0b67c2] bg-[#0b67c2]/20 p-2 rounded-md cursor-pointer text-md font-bold hover:scale-95 duration-200'>
-                            Send Friend Request
-                        </button>
-                    </div>
-                    <div className='text-slate-600 mb-4'>{posts[0]?.content.split('\n').map((sentence)=>{
-                        return (<div>{sentence}</div>)
-                    })}</div>
-                    <div>
-                    {
-                        posts[0]?.image && <img className='rounded-md shadow-md shadow-slate-400' src={`https://emerald-effective-scorpion-239.mypinata.cloud/ipfs/${posts[0]?.image}`}/>
-                    }
-                    </div>
-                    <div className='flex flex-col mt-4 lg:flex-row items-center w-full justify-between text-base text-slate-500 font-bold'>
-                        <div>{posts[0]?.likes}</div>
-                        <div>{posts[0]?.time}</div>
-                        <button className='text-[#0b67c2] bg-[#0b67c2]/20 p-2 rounded-md cursor-pointer text-md font-bold hover:scale-95 duration-200'>Tip Author</button>
-                    </div>
-                    <div className='text-sm text-blue-700 cursor-pointer hover:underline'>see more...</div>
-                </div>
+                <div className='font-bold mb-2'>My Posts</div>
+                {
+                    posts.length > 0 && 
+                    <>
+                        <div className='text-sm text-slate-400 cursor-pointer'>
+                            Author Post Id : { posts[0]?.id }
+                        </div>
+                        <div className='flex flex-col lg:flex-row items-center w-full justify-between text-lg font-bold'>
+                            <div>Author: {posts[0]?.author.substr(0, 20)}...</div>
+                            <button className='text-[#0b67c2] bg-[#0b67c2]/20 p-2 rounded-md cursor-pointer text-md font-bold hover:scale-95 duration-200'>
+                                Send Friend Request
+                            </button>
+                        </div>
+                        <div className='text-slate-600 mb-4'>{posts[0]?.content.split('\n').map((sentence)=>{
+                            return (<div>{sentence}</div>)
+                        })}</div>
+                        <div>
+                        {
+                            posts[0]?.image && <img className='rounded-md shadow-md shadow-slate-400' src={`https://emerald-effective-scorpion-239.mypinata.cloud/ipfs/${posts[0]?.image}`}/>
+                        }
+                        </div>
+                        <div className='flex flex-col mt-4 lg:flex-row items-center w-full justify-between text-base text-slate-500 font-bold'>
+                            <div>{posts[0]?.likes}</div>
+                            <div>{posts[0]?.time}</div>
+                            <button className='text-[#0b67c2] bg-[#0b67c2]/20 p-2 rounded-md cursor-pointer text-md font-bold hover:scale-95 duration-200'>Tip Author</button>
+                        </div>
+                        <div className='text-sm text-blue-700 cursor-pointer hover:underline'>see more...</div>
+                    </>
+                }
+                {
+                    posts.length === 0 && <>Nothing posted so far</>
+                }
+            </div>
         </div>
       )
 }

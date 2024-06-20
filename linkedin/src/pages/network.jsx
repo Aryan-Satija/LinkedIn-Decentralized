@@ -20,11 +20,13 @@ const Network = () => {
             <div className='text-4xl text-sky-800 font-semibold mb-4'>Invitations</div>
             {
                 requests.map((request, id)=>{
-                    return (<div className='cursor-pointer my-8' ky={id}>
-                        <div className='text-sm text-slate-600'>{id}</div>
-                        <div className='hover:underline hover:text-sky-800'>{request.from}</div>
-                        <div className='text-sm text-slate-600'>{request.time}</div>
-                    </div>)
+                    if(request.from.toLowerCase() !== currentAccount.toLowerCase()){
+                        return (<div className='cursor-pointer my-8' ky={id}>
+                            <div className='text-sm text-slate-600'>{id}</div>
+                            <div className='hover:underline hover:text-sky-800'>{request.from}</div>
+                            <div className='text-sm text-slate-600'>{request.time}</div>
+                        </div>)
+                    }
                 })
             }
             {

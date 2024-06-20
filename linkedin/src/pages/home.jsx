@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { GetGlobalProps } from '../context'
 const Home = () => {
-    const {getAllPosts} = GetGlobalProps();
+    const {getAllPosts, sendFriendRequest} = GetGlobalProps();
     const [posts, setPosts] = useState([]);
     useEffect(()=>{
         (async()=>{
@@ -20,7 +20,9 @@ const Home = () => {
                     </div>
                     <div className='flex flex-col lg:flex-row items-center w-full justify-between text-lg font-bold'>
                         <div>Author: {post.author.substr(0, 20)}...</div>
-                        <button className='text-[#0b67c2] bg-[#0b67c2]/20 p-2 rounded-md cursor-pointer text-md font-bold hover:scale-95 duration-200'>
+                        <button onClick={async()=>{
+                            await sendFriendRequest(post.author);
+                        }} className='text-[#0b67c2] bg-[#0b67c2]/20 p-2 rounded-md cursor-pointer text-md font-bold hover:scale-95 duration-200'>
                             Send Friend Request
                         </button>
                     </div>

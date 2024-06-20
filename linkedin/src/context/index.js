@@ -65,9 +65,12 @@ export const ContextProvider = ({children})=>{
 
             // waiting for tx to be mined
             await tx.wait()
+
+            return true;
         } catch(err){
             console.log('Something went wrong');
             console.log(err);
+            return false;
         }
     }
 
