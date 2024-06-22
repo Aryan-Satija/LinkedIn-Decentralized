@@ -14,7 +14,7 @@ const pool = mysql.createPool({
 async function sendMessage(from, to, message){
     try{
         const query = `
-            INSERT INTO linkedin (_from, _to, _text) values (?, ?, ?)
+            INSERT INTO Messages (_from, _to, _text) values (?, ?, ?)
         `
         const values = [from, to, message];
 
@@ -38,16 +38,19 @@ async function sendMessage(from, to, message){
 async function getRoomChats(from, to){
     try{
         const query = `
-            select * from linkedin where _from = ? and to = ? 
+            select * from Messages where _from = ? and _to = ? 
         `
         const values = [from, to];
 
-        const result = await pool.query(query, values);
+        const [result1] = await pool.query(query, values);
+        const [result2] = await pool.query(query, values.reverse());
+    
+        
 
         return  { 
             status: 200,
             success: true,
-            data : result,
+            data : result1.concat(result2),
             message: "query successfull"
         }
         
