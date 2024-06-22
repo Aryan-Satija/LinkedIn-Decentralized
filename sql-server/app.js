@@ -28,6 +28,26 @@ app.post(
     } 
 )
 
+app.post(
+    '/roomInit', async(req, res)=>{  
+        const {from, to} = req.body;
+        try{
+            const response = await getRoomChats(from, to);
+            return res.status(reponse.status).json({
+                success: true,
+                data: response.data,
+                messsage: response.message
+            })
+        } catch(err){
+            console.log(err);
+            return res.status(500).json({
+                success: true,
+                message: "something went wrong"
+            })
+        }
+    } 
+)
+
 app.listen(3000, ()=>{
     console.log(`Server is running on port ${process.env.PORT}`);
 })
