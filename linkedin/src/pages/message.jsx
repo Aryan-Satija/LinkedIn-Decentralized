@@ -8,18 +8,40 @@ const Message = () => {
   const [to, setTo] = useState("");
   const [chat, setChat] = useState([]);
   const {currentAccount} = GetGlobalProps();
+  const [loading, setIsloading] = useState(false);
   async function initRoom() {
     if (text !== "" && currentAccount !== "") {
       setTo(text);
       setRoom(true);
+      setIsloading(true);
       const data = {
         from: currentAccount,
         to: text,
       };
       console.log(data);
       const response = await apiConnector("POST", "http://localhost:3000/roomInit", data);
-      setChat(response.data.data);
+      const chatArray = response.data.data;
+      chatArray.sort((a, b) => new Date(a._createdAt) - new Date(b._createdAt));
+      setChat(chatArray);
       console.log(response);
+      setIsloading(false);
+    }
+  }
+  async function sendMessage() {
+    if(text != "" && to != ""){
+      setIsloading(true);
+      const data = {
+        from: currentAccount,
+        to,
+        message: text
+      };
+      console.log(data);
+      const response = await apiConnector("POST", "http://localhost:3000/sendMessage", data);
+      const chatArray = response.data.data;
+      chatArray.sort((a, b) => new Date(a._createdAt) - new Date(b._createdAt));
+      setChat(chatArray);
+      setText("");
+      setIsloading(false);
     }
   }
   return (
@@ -29,7 +51,7 @@ const Message = () => {
           <div className="mb-2 text-slate-600">Messaging</div>
           <hr />
         </div>
-        <div className="overflow-y-auto flex flex-col h-full justify-end p-2 gap-2">
+        <div className="overflow-y-scroll flex flex-col h-full justify-end p-2 gap-2">
     {
     chat.map((singleChat) => {
       const isCurrentUser = singleChat._from.toLowerCase() === currentAccount.toLowerCase();
@@ -57,6 +79,7 @@ const Message = () => {
               onChange={(event) => {
                 setText(event.target.value);
               }}
+              value={text}
               type="text"
               className="w-full p-2 border-slate-300 border-2 rounded-sm"
             ></input>
@@ -70,7 +93,7 @@ const Message = () => {
           </div>
           <div>
             {room && (
-              <button className="text-[#01744e] rounded-md bg-[#01744e]/20 p-2 mt-8 cursor-pointer text-md font-bold hover:scale-95 duration-200 w-32">
+              <button onClick={sendMessage} className="text-[#01744e] rounded-md bg-[#01744e]/20 p-2 mt-8 cursor-pointer text-md font-bold hover:scale-95 duration-200 w-32">
                 Send Message
               </button>
             )}

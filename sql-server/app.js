@@ -15,9 +15,11 @@ app.post(
         try{
             const {from, to, message} = req.body;
             await sendMessage(from, to, message);
+            const response = await getRoomChats(from, to);
             return res.status(200).json({
                 success: true,
-                message: 'data sent successfully'
+                message: 'data sent successfully', 
+                data: response.data
             })
         } catch(err){
             console.log(err);
@@ -34,7 +36,6 @@ app.post(
         const {from, to} = req.body;
         try{
             const response = await getRoomChats(from, to);
-            console.log(response);
             return res.status(response.status).json({
                 success: true,
                 data: response.data,
