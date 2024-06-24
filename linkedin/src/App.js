@@ -8,6 +8,8 @@ import CreatePost from "./pages/createPost";
 import Notifications from "./pages/notifications";
 import Message from "./pages/message";
 import Jobs from "./pages/jobs";
+import UserProfile from './pages/userProfile.jsx';
+
 function App() {
   return (
     <div className="">
@@ -21,6 +23,8 @@ function App() {
             <Route path="/jobs" element={<Jobs/>}/>
             <Route path="/messages" element={<Message/>}/>
             <Route path="/notifications" element={<Notifications/>}/>
+            <Route path="/notifications" element={<Notifications/>}/>
+            <Route path="/user/:id" element={<UserProfile/>}/>
         </Routes>
     </div>
   );

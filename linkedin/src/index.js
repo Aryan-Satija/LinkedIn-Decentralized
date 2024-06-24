@@ -5,11 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ContextProvider } from './context';
 import {BrowserRouter} from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <ContextProvider>
       <App />
+      <ToastContainer/>
     </ContextProvider>
   </BrowserRouter>
 );

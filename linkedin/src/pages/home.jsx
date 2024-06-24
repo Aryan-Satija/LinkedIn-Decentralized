@@ -1,7 +1,9 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GetGlobalProps } from '../context'
 const Home = () => {
+    const navigate = useNavigate();
     const {getAllPosts, sendFriendRequest, tipAuthor} = GetGlobalProps();
     const [posts, setPosts] = useState([]);
     useEffect(()=>{
@@ -9,7 +11,7 @@ const Home = () => {
             const result = await getAllPosts('0xc78fF2b7cF14E12513A7475146D69Db7818bb161')
             setPosts(result);
         })()
-    },[])
+    },[]);
     async function tip(author){
         try{
             const sent = await tipAuthor(author);
@@ -27,7 +29,9 @@ const Home = () => {
                         Author Post Id : { post.id }
                     </div>
                     <div className='flex flex-col lg:flex-row items-center w-full justify-between text-lg font-bold'>
-                        <div>Author: {post.author.substr(0, 20)}...</div>
+                        <div onClick={()=>{
+                        navigate('/user/'+post.author)
+                    }} className='cursor-pointer hover:text-blue-900 hover:underline'>Author: {post.author.substr(0, 20)}...</div>
                         <button onClick={async()=>{
                             await sendFriendRequest(post.author);
                         }} className='text-[#0b67c2] bg-[#0b67c2]/20 p-2 rounded-md cursor-pointer text-md font-bold hover:scale-95 duration-200'>
