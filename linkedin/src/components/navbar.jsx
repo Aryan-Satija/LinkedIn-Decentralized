@@ -71,9 +71,11 @@ const Navbar = () => {
             </div>
         </div>
         <div>
-            <button className='text-[#0b67c2] bg-[#0b67c2]/20 p-2 rounded-md cursor-pointer text-md font-bold hover:scale-95 duration-200' onClick={async()=>{
+            <button className={currentAccount ? 'text-[#01744e] rounded-md bg-[#01744e]/20 p-2 cursor-pointer text-md font-bold hover:scale-95 duration-200 w-32' : 'text-[#0b67c2] bg-[#0b67c2]/20 p-2 rounded-md cursor-pointer text-md font-bold hover:scale-95 duration-200'} onClick={async()=>{
                 await connectToWallet()
-            }}>Connect</button>
+            }}>{
+                currentAccount ? 'Connected' : 'Connect'
+            }</button>
         </div>
     </div>
   )

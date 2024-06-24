@@ -19,7 +19,7 @@ const Message = () => {
         to: text,
       };
       console.log(data);
-      const response = await apiConnector("POST", "http://localhost:3000/roomInit", data);
+      const response = await apiConnector("POST", "http://localhost:5000/roomInit", data);
       const chatArray = response.data.data;
       chatArray.sort((a, b) => new Date(a._createdAt) - new Date(b._createdAt));
       setChat(chatArray);
@@ -36,7 +36,7 @@ const Message = () => {
         message: text
       };
       console.log(data);
-      const response = await apiConnector("POST", "http://localhost:3000/sendMessage", data);
+      const response = await apiConnector("POST", "http://localhost:5000/sendMessage", data);
       const chatArray = response.data.data;
       chatArray.sort((a, b) => new Date(a._createdAt) - new Date(b._createdAt));
       setChat(chatArray);
@@ -51,28 +51,27 @@ const Message = () => {
           <div className="mb-2 text-slate-600">Messaging</div>
           <hr />
         </div>
-        <div className="overflow-y-scroll flex flex-col h-full justify-end p-2 gap-2">
-    {
-    chat.map((singleChat) => {
-      const isCurrentUser = singleChat._from.toLowerCase() === currentAccount.toLowerCase();
-      const messageClasses = isCurrentUser 
-        ? "flex flex-col place-items-end p-2" 
-        : "p-2";
-      const messageWrapperClasses = isCurrentUser 
-        ? "bg-[#d6e8fb]/50 text-slate-600 max-w-max p-2 rounded-lg"
-        : "bg-gray-200 text-slate-600 max-w-max p-2 rounded-lg";
+        <div className="overflow-y-scroll h-[550px] p-2 ">
+          {
+              chat.map((singleChat) => {
+                const isCurrentUser = singleChat._from.toLowerCase() === currentAccount.toLowerCase();
+                const messageClasses = isCurrentUser 
+                  ? "flex flex-col place-items-end p-2" 
+                  : "p-2";
+                const messageWrapperClasses = isCurrentUser 
+                  ? "bg-[#d6e8fb]/50 text-slate-600 max-w-max p-2 rounded-lg"
+                  : "bg-gray-200 text-slate-600 max-w-max p-2 rounded-lg";
 
-      return (
-        <div key={singleChat._id} className={messageClasses}>
-          <div className={messageWrapperClasses}>
-            {singleChat._text}
-          </div>
+                return (
+                  <div key={singleChat._id} className={messageClasses}>
+                    <div className={messageWrapperClasses}>
+                      {singleChat._text}
+                    </div>
+                  </div>
+                  );
+              })
+          }
         </div>
-          );
-      })
-    }
-    </div>
-
         <div className="p-2 flex items-end justify-between gap-4">
           <div className="w-full">
             <input
