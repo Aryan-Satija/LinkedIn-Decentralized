@@ -11,15 +11,19 @@ const Home = () => {
     const [posts, setPosts] = useState([]);
     useEffect(()=>{
         (async()=>{
-            const result = await getAllPosts('0xc78fF2b7cF14E12513A7475146D69Db7818bb161')
-            setPosts(result);
+            const arr1 = await getAllPosts('0x19B69fAfa794911232E24e2c33dC171471469f01')
+            const arr2 = await getAllPosts('0xbdAdCfE39E57490c689495B011885ec40086d801')
+            const arr3 = await getAllPosts('0xc78fF2b7cF14E12513A7475146D69Db7818bb161')
+            const arr4 = await getAllPosts('0x9b51FB6fE636f979059bd90B375Fc3e153B9F537')
+            const new_arr = [...arr1, ...arr2, ...arr3, ...arr4];
+            setPosts(new_arr);
         })()
     },[]);
     async function tip(author){
         try{
             const id = toast.loading("just a second...");
             const sent = await tipAuthor(author);
-            toast.update(id, {render: 'Request Sent', type: 'success', isLoading: false, autoClose: 5000})
+            toast.update(id, {render: 'Funded Author', type: 'success', isLoading: false, autoClose: 5000})
             console.log(sent);
         } catch(err){
             console.log(err);
@@ -27,6 +31,9 @@ const Home = () => {
     }
   return (
     <div className='bg-[#f4f2ee] pt-[5rem] flex flex-col gap-4 justify-center items-center p-4 min-h-screen'>
+        <button className='text-[#0b67c2] bg-[#0b67c2]/20 p-2 rounded-md cursor-pointer text-md w-[80%] md:w-[40%] min-w-[320px] font-bold hover:scale-95 duration-200' onClick={()=>{
+            navigate("/createPost");
+        }}>Create Post</button>
         {
             posts.map((post) => {
                 return <div className='bg-[#fefefe] w-[80%] md:w-[40%] min-w-[320px] p-4 rounded-md shadow-md'>

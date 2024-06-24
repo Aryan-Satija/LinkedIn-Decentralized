@@ -23,19 +23,19 @@ const BuildProfile1 = ({profile, setProfile, setStep}) => {
         <form onSubmit={submitHandler}>
             <div>
                 <label htmlFor='name' className='text-slate-600'>Name*</label>
-                <input type='text' id='name' placeholder={profile.name} onChange={changeHandler} className='w-full p-4 border-slate-400 border-2 rounded-sm'/>
+                <input type='text' id='name' autocomplete="off"  placeholder={profile.name} onChange={changeHandler} className='w-full p-4 border-slate-400 border-2 rounded-sm'/>
             </div>
             <div>
                 <label htmlFor='organisation' className='text-slate-600'>Organisation*</label>
-                <input type='text' id='organisation' placeholder={profile.organisation} onChange={changeHandler} className='w-full p-4 border-slate-400 border-2 rounded-sm'/>
+                <input type='text' id='organisation' autocomplete="off" placeholder={profile.organisation} onChange={changeHandler} className='w-full p-4 border-slate-400 border-2 rounded-sm'/>
             </div>
             <div>
                 <label htmlFor='lives' className='text-slate-600'>Lives*</label>
-                <input type='text' id='lives' placeholder={profile.lives} onChange={changeHandler} className='w-full p-4 border-slate-400 border-2 rounded-sm'/>
+                <input type='text' id='lives' autocomplete="off"  placeholder={profile.lives} onChange={changeHandler} className='w-full p-4 border-slate-400 border-2 rounded-sm'/>
             </div>
             <div>
                 <label htmlFor='about' className='text-slate-600'>About*</label>
-                <input type='text' id='about' placeholder={profile.about} onChange={changeHandler} className='w-full p-4 border-slate-400 border-2 rounded-sm'/>
+                <input type='text' id='about' autocomplete="off"  placeholder={profile.about} onChange={changeHandler} className='w-full p-4 border-slate-400 border-2 rounded-sm'/>
             </div>
             <div>
                 <label className='text-slate-600'>Pronoun*</label>

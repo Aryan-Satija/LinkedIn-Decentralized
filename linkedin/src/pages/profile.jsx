@@ -20,7 +20,7 @@ const Profile = () => {
             <div className='w-[80%] min-w-[320px] bg-[#fefffe] p-4 rounded-md relative'>
                 <div className='bg-slate-800 w-full h-[150px] rounded-t-md'>
                 </div>
-                <img src="https://api.dicebear.com/8.x/adventurer/svg?seed=Chloe" alt="profile_pic" className='w-[150px] absolute top-20 left-8 bg-white rounded-full'/>
+                <img src="https://api.dicebear.com/9.x/identicon/svg?seed=Miss%20kitty" alt="profile_pic" className='w-[150px] absolute top-20 left-8 bg-white rounded-full'/>
                 <div className='font-bold mt-16'>{me?.name}<span className='text-sm text-slate-600 font-semibold'>(He/Him)</span></div>
                 <div className='text-slate-600'>
                     {me?.about}
