@@ -98,7 +98,8 @@ export const ContextProvider = ({children})=>{
     const addPost = async(content, imageHash)=>{
         const contract = await createContract();
         try{
-            await contract.addPost(content, imageHash);
+            const tx = await contract.addPost(content, imageHash);
+            await tx.wait();
         } catch(err){
             console.log(err);
         }

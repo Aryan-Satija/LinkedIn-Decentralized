@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import {pinFileToIPFS} from '../utils/ipfsUploadHandler';
 import { GetGlobalProps } from '../context'
 import {useNavigate} from 'react-router-dom';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreatePost = () => {
     const navigate = useNavigate();
@@ -26,7 +28,9 @@ const CreatePost = () => {
     }
     
     const submitHandler = async()=>{
+        const id = toast.loading("just a second...");
         await addPost(description, ipfsUrl);
+        toast.update(id, {render: 'Post Created...', type: 'success', isLoading: false, autoClose: 5000})
         navigate("/");   
     }
 
@@ -38,7 +42,7 @@ const CreatePost = () => {
         event.preventDefault();
         if(file){
             try{
-                console.log('waiting....');
+                const id = toast.loading("just a second...");
                 
                 const formData = new FormData();
                 
@@ -46,7 +50,8 @@ const CreatePost = () => {
                 
                 const data = await pinFileToIPFS(formData);
 
-                // console.log(data);
+                toast.update(id, {render: 'File Uploaded...', type: 'success', isLoading: false, autoClose: 5000})
+                
                 setIpfsUrl(data.IpfsHash);
             } catch(err){
                 console.log(err);

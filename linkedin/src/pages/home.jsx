@@ -1,7 +1,10 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GetGlobalProps } from '../context'
+import { GetGlobalProps } from '../context';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Home = () => {
     const navigate = useNavigate();
     const {getAllPosts, sendFriendRequest, tipAuthor} = GetGlobalProps();
@@ -14,7 +17,9 @@ const Home = () => {
     },[]);
     async function tip(author){
         try{
+            const id = toast.loading("just a second...");
             const sent = await tipAuthor(author);
+            toast.update(id, {render: 'Request Sent', type: 'success', isLoading: false, autoClose: 5000})
             console.log(sent);
         } catch(err){
             console.log(err);
@@ -33,7 +38,9 @@ const Home = () => {
                         navigate('/user/'+post.author)
                     }} className='cursor-pointer hover:text-blue-900 hover:underline'>Author: {post.author.substr(0, 20)}...</div>
                         <button onClick={async()=>{
+                            const id = toast.loading("just a second...");
                             await sendFriendRequest(post.author);
+                            toast.update(id, {render: 'Request Sent', type: 'success', isLoading: false, autoClose: 5000})
                         }} className='text-[#0b67c2] bg-[#0b67c2]/20 p-2 rounded-md cursor-pointer text-md font-bold hover:scale-95 duration-200'>
                             Send Friend Request
                         </button>
