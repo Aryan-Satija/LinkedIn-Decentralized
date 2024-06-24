@@ -36,11 +36,17 @@ contract chatapp {
         string image;
     }
 
+    struct tip{
+        address from;
+        uint256 amount;
+        uint256 time;
+    }
+
     mapping(address => Profile) public userProfile;
     mapping(address => address[]) friends;
     mapping(address => request[]) friendRequest;
     mapping(address => Post[]) posts;
-    
+    mapping(address => tip[]) tips;
     constructor() {
         owner = msg.sender;
     }
@@ -164,6 +170,20 @@ contract chatapp {
     }
     function getUserProfile(address user) external view returns(Profile memory) {
         return userProfile[user];
+    }
+    function tipAuthor(address author) public payable {
+        require(author != address(0), "Invalid author address found");
+        uint256 amount = msg.value;
+        tip memory newtip = tip({
+            from: msg.sender,
+            amount: msg.value,
+            time: block.timestamp
+        });
+        
+        tips[author].push(newtip);
+
+        (bool sent, ) = payable(author).call{value: amount}("");
+        require(sent, "Failed to send amount");
     }
 }
 

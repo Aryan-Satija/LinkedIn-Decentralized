@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { GetGlobalProps } from '../context'
 const Home = () => {
-    const {getAllPosts, sendFriendRequest} = GetGlobalProps();
+    const {getAllPosts, sendFriendRequest, tipAuthor} = GetGlobalProps();
     const [posts, setPosts] = useState([]);
     useEffect(()=>{
         (async()=>{
@@ -10,6 +10,14 @@ const Home = () => {
             setPosts(result);
         })()
     },[])
+    async function tip(author){
+        try{
+            const sent = await tipAuthor(author);
+            console.log(sent);
+        } catch(err){
+            console.log(err);
+        }
+    }
   return (
     <div className='bg-[#f4f2ee] pt-[5rem] flex flex-col gap-4 justify-center items-center p-4 min-h-screen'>
         {
@@ -37,7 +45,9 @@ const Home = () => {
                     <div className='flex flex-col mt-4 lg:flex-row items-center w-full justify-between text-base text-slate-500 font-bold'>
                         <div>{post.likes}</div>
                         <div>{post.time}</div>
-                        <button className='text-[#0b67c2] bg-[#0b67c2]/20 p-2 rounded-md cursor-pointer text-md font-bold hover:scale-95 duration-200'>Tip Author</button>
+                        <button className='text-[#0b67c2] bg-[#0b67c2]/20 p-2 rounded-md cursor-pointer text-md font-bold hover:scale-95 duration-200' onClick={()=>{
+                            tip(post.author)
+                        }}>Tip Author</button>
                     </div>
                 </div>
             })

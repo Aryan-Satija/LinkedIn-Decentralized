@@ -1,6 +1,7 @@
 import React, {createContext, useContext, useState} from 'react';
 import {ethers} from 'ethers';
 import {contractAddress, contractAbi} from '../constants'
+import util from 'util';
 
 const {ethereum} = window;
 const myContext = createContext();
@@ -177,6 +178,19 @@ export const ContextProvider = ({children})=>{
             console.log(err);
         }
     }
+    const tipAuthor = async(author)=>{
+        try{
+            const contract = await createContract();
+            const tx = await contract.tipAuthor(author, {
+                value: ethers.parseEther("0.1")
+            })
+            return true;
+        } catch(err){
+            console.log(err);
+            return false;
+        }
+    }
+
     return (<myContext.Provider 
     value={{
                 currentAccount,
@@ -189,7 +203,8 @@ export const ContextProvider = ({children})=>{
                 getUserProfile,
                 updateProfile,
                 updateDesc,
-                updateSkills
+                updateSkills,
+                tipAuthor
             }}>
         {
             children
